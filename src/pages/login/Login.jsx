@@ -79,7 +79,6 @@ function Login() {
           return (
             <Box className="bg-img">
             <Form
-              className="login-form"
               autoComplete="off"
               noValidate
               onSubmit={handleSubmit}
