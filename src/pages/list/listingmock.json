@@ -1,0 +1,43 @@
+{
+    "data": [
+        {
+            "name": "SCB model monitoring RFP",
+            "LITM_offering": "Fosfor Refract",
+            "status": "Proposal Pending",
+            "genereted_proposal": true,
+            "created_by": "Shailendra",
+            "created_on": "10/10/2023"
+        },
+        {
+            "name": "SCB model monitoring RFP",
+            "LITM_offering": "Fosfor Refract",
+            "status": "Proposal Pending",
+            "genereted_proposal": true,
+            "created_by": "Tushar",
+            "created_on": "10/10/2023"
+        },
+        {
+            "name": "SCB model monitoring RFP",
+            "LITM_offering": "Fosfor Refract",
+            "status": "Proposal Pending",
+            "genereted_proposal": false,
+            "created_by": "Shailendra",
+            "created_on": "10/10/2023"
+        },
+        {
+            "name": "SCB model monitoring RFP",
+            "LITM_offering": "Fosfor Refract",
+            "status": "Proposal Pending",
+            "genereted_proposal": true,
+            "created_by": "Shailendra",
+            "created_on": "10/10/2023"
+        },{
+            "name": "SCB model monitoring RFP",
+            "LITM_offering": "Fosfor Refract",
+            "status": "Proposal Pending",
+            "genereted_proposal": "",
+            "created_by": "Tushar",
+            "created_on": "10/10/2023"
+        }
+    ]
+}

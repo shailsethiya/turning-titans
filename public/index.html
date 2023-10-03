@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <base href="/ai/" />
+    <link id="favIconLogo" rel="icon" href="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <!-- <meta name="description" content="Web site created using create-react-app" /> -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+     frame-ancestors 'none' == X-Frame-Options: SAMEORIGIN
+     script-src 'self' https://ajax.googleapis.com/ajax/libs/ https://maxcdn.bootstrapcdn.com/bootstrap/ https://cdn.datatables.net/ https://www.googletagmanager.com/ https://www.google-analytics.com/ https://googleads.g.doubleclick.net/
+     https://cdn.mouseflow.com/ https://*.clarity.ms/ https://tag.demandbase.com/ https://www.googleadservices.com/ https://cdn.jsdelivr.net/
+     'unsafe-inline' 'unsafe-eval';"
+    />
+    <!-- Google Tag Manager -->
+    <script>
+      if (
+        window.location.host.indexOf('refract') > -1 &&
+        window.location.host.indexOf('dev') === -1
+      ) {
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P2ZZF89');
+
+        const s = document.createElement('script');
+        s.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=G-MBPWZW9NR2');
+        s.async = true;
+        document.head.appendChild(s);
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () {
+          window.dataLayer.push(arguments);
+        };
+
+        window.gtag('js', new Date());
+        window.gtag('config', 'G-MBPWZW9NR2');
+      }
+    </script>
+    <!-- End Google Tag Manager -->
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title></title>
+    <style>
+      @keyframes loader-rotating-keyframes {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      #app-loader-mosaic {
+        background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxMDAlIDEwMCUiIGZpbGw9IiNkM2QzZDMiPgogIDxwYXRoIGQ9Ik02Ny40NDcgNThjNS41MjMgMCAxMC00LjQ3NyAxMC0xMHMtNC40NzctMTAtMTAtMTAtMTAgNC40NzctMTAgMTAgNC40NzcgMTAgMTAgMTB6bTkuNDQ4IDkuNDQ3YzAgNS41MjMgNC40NzcgMTAgMTAgMTAgNS41MjIgMCAxMC00LjQ3NyAxMC0xMHMtNC40NzgtMTAtMTAtMTBjLTUuNTIzIDAtMTAgNC40NzctMTAgMTB6bS05LjQ0OCA5LjQ0OGMtNS41MjMgMC0xMCA0LjQ3Ny0xMCAxMCAwIDUuNTIyIDQuNDc3IDEwIDEwIDEwczEwLTQuNDc4IDEwLTEwYzAtNS41MjMtNC40NzctMTAtMTAtMTB6TTU4IDY3LjQ0N2MwLTUuNTIzLTQuNDc3LTEwLTEwLTEwcy0xMCA0LjQ3Ny0xMCAxMCA0LjQ3NyAxMCAxMCAxMCAxMC00LjQ3NyAxMC0xMHoiPgogICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGR1cj0iMi41cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KICA8L3BhdGg+CiAgPHBhdGggZD0iTTI4LjE5IDQwLjMxYzYuNjI3IDAgMTItNS4zNzQgMTItMTIgMC02LjYyOC01LjM3My0xMi0xMi0xMi02LjYyOCAwLTEyIDUuMzcyLTEyIDEyIDAgNi42MjYgNS4zNzIgMTIgMTIgMTJ6bTMwLjcyLTE5LjgyNWM0LjY4NiA0LjY4NyAxMi4yODQgNC42ODcgMTYuOTcgMCA0LjY4Ni00LjY4NiA0LjY4Ni0xMi4yODQgMC0xNi45Ny00LjY4Ni00LjY4Ny0xMi4yODQtNC42ODctMTYuOTcgMC00LjY4NyA0LjY4Ni00LjY4NyAxMi4yODQgMCAxNi45N3ptMzUuNzQgNy43MDVjMCA2LjYyNyA1LjM3IDEyIDEyIDEyIDYuNjI2IDAgMTItNS4zNzMgMTItMTIgMC02LjYyOC01LjM3NC0xMi0xMi0xMi02LjYzIDAtMTIgNS4zNzItMTIgMTJ6bTE5LjgyMiAzMC43MmMtNC42ODYgNC42ODYtNC42ODYgMTIuMjg0IDAgMTYuOTcgNC42ODcgNC42ODYgMTIuMjg1IDQuNjg2IDE2Ljk3IDAgNC42ODctNC42ODYgNC42ODctMTIuMjg0IDAtMTYuOTctNC42ODUtNC42ODctMTIuMjgzLTQuNjg3LTE2Ljk3IDB6bS03LjcwNCAzNS43NGMtNi42MjcgMC0xMiA1LjM3LTEyIDEyIDAgNi42MjYgNS4zNzMgMTIgMTIgMTJzMTItNS4zNzQgMTItMTJjMC02LjYzLTUuMzczLTEyLTEyLTEyem0tMzAuNzIgMTkuODIyYy00LjY4Ni00LjY4Ni0xMi4yODQtNC42ODYtMTYuOTcgMC00LjY4NiA0LjY4Ny00LjY4NiAxMi4yODUgMCAxNi45NyA0LjY4NiA0LjY4NyAxMi4yODQgNC42ODcgMTYuOTcgMCA0LjY4Ny00LjY4NSA0LjY4Ny0xMi4yODMgMC0xNi45N3ptLTM1Ljc0LTcuNzA0YzAtNi42MjctNS4zNzItMTItMTItMTItNi42MjYgMC0xMiA1LjM3My0xMiAxMnM1LjM3NCAxMiAxMiAxMmM2LjYyOCAwIDEyLTUuMzczIDEyLTEyem0tMTkuODIzLTMwLjcyYzQuNjg3LTQuNjg2IDQuNjg3LTEyLjI4NCAwLTE2Ljk3LTQuNjg2LTQuNjg2LTEyLjI4NC00LjY4Ni0xNi45NyAwLTQuNjg3IDQuNjg2LTQuNjg3IDEyLjI4NCAwIDE2Ljk3IDQuNjg2IDQuNjg3IDEyLjI4NCA0LjY4NyAxNi45NyAweiI+CiAgICA8YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgZHVyPSI4cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KICA8L3BhdGg+Cjwvc3ZnPgo=');
+        background-repeat: no-repeat;
+        width: 140px;
+        height: 145px;
+        left: calc(44%);
+        top: calc(40%);
+        position: absolute;
+        display: none;
+        animation: loader-rotating-keyframes linear 3s infinite;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+      }
+
+      #app-loader {
+        width: 100%;
+        height: 100%;
+        display: none;
+        flex-direction: column;
+        background-color: #d3d3d3;
+      }
+
+      #app-loader-header {
+        height: 38px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 24px;
+        padding-right: 8px;
+        box-sizing: border-box;
+      }
+
+      .newThemeHeaderModifications {
+        background-color: #00001e;
+      }
+
+      #app-loader-header #app-logo {
+        width: 100px;
+        height: 16px;
+        background-repeat: no-repeat;
+        background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 107.28 19.29' style='enable-background:new 0 0 107.28 19.29;' xml:space='preserve'%3E%3Cg%3E%3Cpath d='M20.06,6.02v13.03h-3.29V8.7h-5.1v10.34H8.39V8.7h-5.1v10.34H0V6.02H20.06z'/%3E%3Cpath d='M22.63,12.52c0-4.04,2.8-6.74,6.98-6.74c4.16,0,6.96,2.71,6.96,6.74c0,4.06-2.8,6.77-6.96,6.77 C25.43,19.29,22.63,16.58,22.63,12.52z M33.17,12.52c0-2.37-1.43-3.94-3.55-3.94c-2.15,0-3.58,1.57-3.58,3.94 c0,2.37,1.43,3.94,3.58,3.94C31.74,16.46,33.17,14.89,33.17,12.52z'/%3E%3Cpath d='M38.53,17.74l1.26-1.98c1.23,0.72,2.46,0.97,3.75,0.97c1.21,0,2.03-0.51,2.03-1.3c0-0.8-0.92-1.23-2.22-1.57l-1.09-0.29 c-2.2-0.58-3.72-1.43-3.72-3.48c0-2.59,2.05-4.3,5.12-4.3c1.98,0,3.63,0.41,4.93,1.28l-1.38,2.15c-1.06-0.58-2.15-0.85-3.31-0.85 c-1.21,0-2.01,0.44-2.01,1.18c0,0.77,0.82,1.14,1.96,1.43l1.06,0.31c2.25,0.58,3.99,1.6,3.99,3.89c0,2.46-2.15,4.11-5.41,4.11 C41.51,19.29,39.74,18.78,38.53,17.74z'/%3E%3Cpath d='M62.32,6.02v13.03h-3.17l-0.07-1.86c-0.87,1.35-2.37,2.1-3.96,2.1c-2.71,0-4.52-1.62-4.52-4.04c0-2.51,2.22-4.16,5.56-4.16 c0.89,0,1.89,0.1,2.88,0.29V8.6h-7.61V6.02H62.32z M59.03,13.61c-0.85-0.17-1.72-0.27-2.47-0.27c-1.55,0-2.54,0.73-2.54,1.84 c0,1.06,0.7,1.76,2.03,1.76C57.58,16.94,59.01,15.73,59.03,13.61z'/%3E%3Cpath d='M70.03,19.05h-3.29V8.7h-2.37V6.02h5.66V19.05z M66.43,1.96c0-1.14,0.85-1.96,1.98-1.96s1.93,0.82,1.93,1.96 c0,1.14-0.8,1.93-1.93,1.93S66.43,3.09,66.43,1.96z'/%3E%3Cpath d='M72.69,12.52c0-4.04,2.78-6.74,6.96-6.74c0.94,0,1.96,0.27,2.71,0.68V9.5c-0.6-0.56-1.55-0.92-2.51-0.92 c-2.25,0-3.75,1.57-3.75,3.94c0,2.37,1.5,3.94,3.75,3.94c1.01,0,2.01-0.39,2.61-0.99v3.05c-0.7,0.48-1.81,0.77-2.8,0.77 C75.47,19.29,72.69,16.58,72.69,12.52z'/%3E%3Cpath d='M100.73,6.36v12.69h-1.14l-0.02-2.8v-0.27c-0.87,2.08-2.85,3.31-5.05,3.31c-2.44,0-4.08-1.43-4.08-3.6 c0-2.27,2.03-3.79,5.1-3.79c1.33,0,2.75,0.17,4.04,0.51V7.32h-8.31V6.36H100.73z M99.57,13.27c-1.23-0.34-2.63-0.51-3.89-0.51 c-2.42,0-4.04,1.16-4.04,2.9c0,1.64,1.23,2.73,3.19,2.73C97.03,18.39,99.57,16.56,99.57,13.27z'/%3E%3Cpath d='M107.02,19.05h-1.16V7.35h-2.83V6.36h3.99V19.05z M107.28,1.84c0,0.51-0.39,0.89-0.87,0.89s-0.87-0.39-0.87-0.89 c0-0.48,0.39-0.87,0.87-0.87S107.28,1.35,107.28,1.84z'/%3E%3C/g%3E%3C/svg%3E%0A");
+      }
+
+      .newThemeHeaderModifications #app-logo {
+        height: 24px !important;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 116 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_671_3555)'%3E%3Cpath d='M11.135 1.67459H0V24H11.135V1.67459Z' fill='url(%23paint0_linear_671_3555)'/%3E%3Cpath d='M22.2849 1.67459L16.7092 7.25706L11.135 12.838V1.67459H22.2849Z' fill='%23B450FF'/%3E%3Cpath d='M33.4481 6.15005H36.305V8.20949C36.9995 6.89894 38.2343 6.15005 39.9914 6.15005H41.5675V8.87814H39.564C37.2399 8.87814 36.3317 10.107 36.3317 12.89V19.5215H33.4481V6.15005Z' fill='%23B450FF'/%3E%3Cpath d='M42.7429 12.8886C42.7429 8.95841 45.7601 5.88263 49.6854 5.88263C53.639 5.88263 56.5493 8.74444 56.5493 12.7014V13.8262H45.4929C45.8669 15.8841 47.4697 17.2437 49.7967 17.2437C51.6133 17.2437 53.0024 16.2808 53.6969 14.8366L56.0462 16.1471C54.8708 18.3403 52.7619 19.7846 49.7967 19.7846C45.5731 19.7875 42.7429 16.7652 42.7429 12.8886ZM45.6265 11.3908H53.6405C53.2131 9.45915 51.7439 8.39675 49.6869 8.39675C48.7759 8.38105 47.8849 8.66561 47.1512 9.20661C46.4176 9.7476 45.8818 10.5151 45.6265 11.3908Z' fill='%23B450FF'/%3E%3Cpath d='M57.6445 6.15007H59.9211V5.45468C59.9211 1.2838 61.2034 0 65.3959 0H65.6363V2.64785C63.0985 2.64785 62.8047 3.07578 62.8047 5.48143V6.15007H65.6363V8.71768H62.7987V19.5201H59.9211V8.71768H57.6505L57.6445 6.15007Z' fill='%23B450FF'/%3E%3Cpath d='M67.8208 6.15005H70.6777V8.20949C71.3722 6.89894 72.607 6.15005 74.3626 6.15005H75.9387V8.87814H73.9352C71.6126 8.87814 70.7044 10.107 70.7044 12.89V19.5215H67.8208V6.15005Z' fill='%23B450FF'/%3E%3Cpath d='M77.1143 12.8351C77.1143 8.55722 80.2932 5.88263 83.7926 5.88263C85.5557 5.88263 87.2372 6.65826 88.2255 7.88857V6.15009H91.0869V19.523H88.2241V17.6746C87.209 18.9852 85.5275 19.7875 83.7644 19.7875C80.3733 19.7875 77.1143 17.0862 77.1143 12.8351ZM88.3843 12.8083C88.3843 10.4309 86.5945 8.47698 84.1651 8.47698C81.7906 8.47698 79.9459 10.3745 79.9459 12.8083C79.9459 15.2422 81.7876 17.1664 84.1651 17.1664C86.5945 17.1664 88.3843 15.214 88.3843 12.8083Z' fill='%23B450FF'/%3E%3Cpath d='M93.3516 12.8351C93.3516 8.90492 96.4236 5.88263 100.327 5.88263C103.295 5.88263 105.641 7.56762 106.656 9.97327L104.092 11.0699C103.425 9.51859 102.063 8.55722 100.327 8.55722C97.9522 8.55722 96.1609 10.4547 96.1609 12.8351C96.1609 15.1872 97.976 17.1129 100.38 17.1129C102.197 17.1129 103.532 15.9896 104.145 14.4933L106.736 15.5884C105.668 18.0491 103.451 19.7875 100.327 19.7875C99.4101 19.7994 98.5003 19.628 97.6507 19.2832C96.8011 18.9384 96.0288 18.4272 95.3791 17.7797C94.7295 17.1321 94.2155 16.3612 93.8673 15.5121C93.5191 14.663 93.3438 13.7529 93.3516 12.8351Z' fill='%23B450FF'/%3E%3Cpath d='M108.014 6.15005H110.283V2.99552L113.168 1.41751V6.15005H115.998V8.71766H113.168V14.0386C113.168 16.4443 113.542 16.8187 115.998 16.8187V19.52H115.574C111.514 19.52 110.285 18.2362 110.285 14.0654V8.71617H108.014V6.15005Z' fill='%23B450FF'/%3E%3C/g%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_671_3555' x1='5.56826' y1='24' x2='5.56826' y2='1.67459' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0.15' stop-color='%23B450FF'/%3E%3Cstop offset='0.21' stop-color='%23B450FF' stop-opacity='0.93'/%3E%3Cstop offset='0.6' stop-color='%23B450FF' stop-opacity='0.44'/%3E%3Cstop offset='0.88' stop-color='%23B450FF' stop-opacity='0.12'/%3E%3Cstop offset='1' stop-color='%23B450FF' stop-opacity='0'/%3E%3C/linearGradient%3E%3CclipPath id='clip0_671_3555'%3E%3Crect width='116' height='24' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A") !important;
+      }
+
+      #app-loader-header ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        list-style: none;
+        padding: unset;
+        gap: 16px;
+      }
+
+      .newThemeHeaderModifications ul li {
+        background-color: rgb(76, 76, 97) !important;
+      }
+
+      #app-loader-sidebar {
+        flex-grow: 1;
+        width: 50px;
+        height: 100%;
+        background-color: #242830;
+        border-radius: 0 18px 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .newThemeSideBarModifications {
+        border-radius: unset !important;
+        background-color: #00001e !important;
+      }
+
+      .personaThemeSideBarModifications {
+        border-radius: unset !important;
+        background-color: #42118d !important;
+        width: 4.583vw !important;
+      }
+
+      .personaThemeSideBarModifications #refract-logo {
+        width: 30px !important;
+        height: 40px !important;
+        position: absolute;
+        top: 1.5vw;
+        left: 1.5vw;
+        background-image: url('data:image/svg+xml;base64, PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE4LjAyNTYgNi4wMDEyMUwyMy45OTk5IDBIMTIuMDUyMlYxMi4wMDA5TDE4LjAyNTYgNi4wMDEyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xMS45MzE3IDBIMFYyNC4wMDAySDExLjkzMTdWMFoiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcl8yMDQxXzcwNDUyKSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDBfbGluZWFyXzIwNDFfNzA0NTIiIHgxPSI1Ljk2NjY0IiB5MT0iMjQuMDAwMiIgeDI9IjUuOTY2NjQiIHkyPSIwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIG9mZnNldD0iMC4xNSIgc3RvcC1jb2xvcj0id2hpdGUiLz4KPHN0b3Agb2Zmc2V0PSIwLjIxIiBzdG9wLWNvbG9yPSJ3aGl0ZSIgc3RvcC1vcGFjaXR5PSIwLjkzIi8+CjxzdG9wIG9mZnNldD0iMC42IiBzdG9wLWNvbG9yPSJ3aGl0ZSIgc3RvcC1vcGFjaXR5PSIwLjQ0Ii8+CjxzdG9wIG9mZnNldD0iMC44OCIgc3RvcC1jb2xvcj0id2hpdGUiIHN0b3Atb3BhY2l0eT0iMC4xMiIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IndoaXRlIiBzdG9wLW9wYWNpdHk9IjAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K') !important;
+        background-repeat: no-repeat;
+      }
+
+      .personaThemeSideBarModifications ul li {
+        background-color: #d7b8f7 !important;
+        width: 28px !important;
+        height: 28px !important;
+      }
+
+      #app-loader-sidebar ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        list-style: none;
+        padding: unset;
+      }
+
+      #app-loader-sidebar ul li {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #191b21;
+      }
+
+      .newThemeSideBarModifications ul li {
+        background-color: rgb(76, 76, 97) !important;
+      }
+
+      #app-loader-footer {
+        padding: 2px;
+        font-size: 0.6875rem;
+        font-family: Inter, Lato, sans-serif !important;
+        font-weight: 400;
+        line-height: 16px;
+        letter-spacing: 0.33px;
+        color: #242830;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 8px;
+      }
+
+      #app-loader-spinner {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 3px solid #bebebe;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }
+
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-P2ZZF89"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <div id="app-loader-mosaic"></div>
+
+    <div id="app-loader">
+      <div id="app-loader-spinner"></div>
+      <div id="app-loader-header">
+        <div id="app-logo"></div>
+        <ul>
+          <li style="width: 80px; height: 10px; background-color: #bebebe; border-radius: 5px"></li>
+          <li style="width: 25px; height: 25px; background-color: #bebebe; border-radius: 50%"></li>
+          <li style="width: 25px; height: 25px; background-color: #00a8cc; border-radius: 50%"></li>
+        </ul>
+      </div>
+      <div id="app-loader-sidebar">
+        <ul id="refract-logo"></ul>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <span id="app-loader-footer"></span>
+    </div>
+
+    <div id="root"></div>
+  </body>
+</html>

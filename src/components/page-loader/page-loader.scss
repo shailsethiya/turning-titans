@@ -1,0 +1,28 @@
+@import '../../shared/variables.module.scss';
+
+.app-loader {
+  height: calc(100vh - 7vw);
+}
+
+.app-loader-spinner-new {
+  width: 40px;
+  height: 40px;
+  border-radius: 40%;
+  border: 3px solid $arsenic;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

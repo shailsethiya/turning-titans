@@ -1,0 +1,19 @@
+@import '../../containers/shared/variables.module.scss';
+
+.dashboard-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-section-gap .form-heading {
+    font-size: $font-16;
+    font-weight: 600;
+}
+
+.form-section-gap {
+    display: flex;
+    font-size: $font-14;
+    flex-direction: column;
+    gap: 1.8vw;
+}

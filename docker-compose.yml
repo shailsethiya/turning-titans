@@ -1,0 +1,31 @@
+version: "3"
+
+###### Dev nvironment ######
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      target: development
+    ports:
+      - 3000:3000
+    container_name: react-app-dev
+    image: react-app-dev-image
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./src:/app/src
+      # - /app/node_modules
+
+###### Production environment ###
+# services:
+#   app:
+#     build:
+#       context: ./
+#       dockerfile: ./Dockerfile
+#     ports:
+#       - "80:80"
+#     container_name: react-app-prod
+#     environment:
+#       - NODE_ENV=production
+

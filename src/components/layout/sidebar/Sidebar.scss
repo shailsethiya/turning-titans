@@ -1,0 +1,72 @@
+@import '../../../containers/shared/variables.module.scss';
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  width: 15vw;
+  height: 100vh;
+  padding: 1.5vw 0 1.25vw;
+  background-color: $pixiePowder;
+  z-index: 2000;
+
+  .beta-chip {
+    border-radius: 4px;
+    height: 1.1vw;
+    color: $white;
+    background-image: linear-gradient(133.15deg, $LightDeepPink 0%, $magenta 96.98%);
+    font-weight: $font-wgt-600;
+    font-size: $font-10;
+    letter-spacing: 0.4px;
+
+    .MuiChip-label {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 0 0.3vw;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    .tab {
+      cursor: pointer;
+      padding: 1vw 0;
+
+      .tab-padding{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .active-tab {
+        background: $grape;
+        border-radius: 2vw;
+        padding: 0.4vw 1vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      p {
+        font-size: $font-14;
+        color: $white;
+        font-weight: 500;
+      }
+
+      .overflow {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 10vw;
+        white-space: nowrap;
+      }
+    }
+
+    svg {
+      cursor: pointer;
+    }
+  }
+}

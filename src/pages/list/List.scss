@@ -1,0 +1,76 @@
+@import '../../containers/shared/variables.module.scss';
+
+.table-view {
+  background-color: transparent !important;
+  width: 100% !important;
+}
+
+.list-header {
+  display: flex;
+  gap: 5vw;
+  background: $brightGray;
+  font-size: $font-14;
+  font-weight: $font-wgt-600;
+  padding: 1%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.col-width1 {
+  width: 1vw;
+}
+
+.col-width2 {
+  width: 5vw;
+}
+
+.col-width {
+  width: 3vw;
+}
+
+.list-col {
+  color: $blackRussian;
+  font-size: $font-16;
+  font-weight: $font-wgt-400;
+  text-transform: capitalize;
+}
+
+.run {
+  cursor: pointer;
+}
+
+.alignment {
+  display: flex;
+  align-items: center;
+}
+
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 10vw;
+}
+
+.list-item-risk {
+  display: flex;
+  gap: 5vw;
+  padding: 0.6% 1%;
+  border-bottom: 1px solid $whiteSmoke;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $ghostWhite;
+    cursor: pointer;
+  }
+}
+
+.list-body {
+  background-color: $white;
+  overflow-y: scroll;
+}
+
+.makeStyles-root-32 {
+  height: 0px;
+}
