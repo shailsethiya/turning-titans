@@ -1,5 +1,3 @@
-export const DASHBOARD_ROUTE = `/dashboard`;
-export const LIST_ROUTE = `/listing`;
 
 export const LOGIN = {
     LOGIN_DETAILS: [

@@ -11,9 +11,6 @@ import { ReactComponent as FeatureStore } from '../../../assets/images/sidebar/f
 import { extract_query_param } from '../../../containers/utils/utils';
 import './Sidebar.scss';
 import variables from '../../../containers/shared/variables.module.scss';
-import {
-  DASHBOARD_ROUTE, LIST_ROUTE
-} from '../../../containers/shared/constants';
 import { paths } from '../../../routes/Path';
 
 const Sidebar = ({ history }) => {
@@ -25,18 +22,18 @@ const Sidebar = ({ history }) => {
     () =>
       [
         {
-          label: 'Create Proposal',
-          link: paths.DASHBOARD,
+          label: 'Proposal',
+          link: paths.PROPOSAL,
           iconName: 'smart-home.svg',
         },
         {
-          label: 'List',
+          label: 'Listing',
           link: paths.LISTING,
           iconName: 'atom.svg',
         },
         {
           label: 'Manage',
-          link: '',
+          link: paths.MANAGE,
           iconName: 'feature-store.svg',
         }
       ],

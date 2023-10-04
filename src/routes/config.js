@@ -3,9 +3,10 @@ import { paths } from "./Path";
 import GuestRoute from "./GuestRoutes";
 import PrivateRoute from "./PrivateRoutes";
 import GuestLayout from "../components/layout/GuestLayout";
-import Dashboard from '../pages/dashboard/Dashboard';
-import Listing from '../pages/list/Listing';
-import Sidebar from '../components/layout/sidebar/Sidebar';
+import Proposal from "../pages/proposal/Proposal";
+import Manage from "../pages/manage/Manage";
+import Listing from "../pages/list/Listing";
+import Sidebar from "../components/layout/sidebar/Sidebar";
 import Login from "../pages/login/Login";
 import { Navigate } from "react-router-dom";
 import Layout from "../components/layout/Layout";
@@ -20,14 +21,19 @@ const MainRoutes = {
   children: [
     // Dashboard
     {
-      path: paths.DASHBOARD,
-      element: <Dashboard />,
+      path: paths.PROPOSAL,
+      element: <Proposal />,
     },
     // List
     {
       path: paths.LISTING,
-      element: <Listing/>,
-    }
+      element: <Listing />,
+    },
+    //Manage
+    {
+      path: paths.MANAGE,
+      element: <Manage />,
+    },
   ],
 };
 
@@ -54,7 +60,4 @@ const AuthenticationRoutes = {
  * @params {boolean}
  * @return {Array} of all paths & routes
  */
-export const getRoutes = () => [
-  AuthenticationRoutes,
-  MainRoutes,
-];
+export const getRoutes = () => [AuthenticationRoutes, MainRoutes];

@@ -8,7 +8,7 @@ export const paths = {
   DEFAULT: "/",
   ANY: "/*",
   PAGE_NOT_FOUND: "/404",
-  DASHBOARD : "/dashboard",
+  PROPOSAL: "/proposal",
   LISTING: "/listing",
-  
+  MANAGE: "/manage",
 };
