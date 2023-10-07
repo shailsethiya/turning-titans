@@ -43,7 +43,7 @@ function Login() {
       if (res.success) {
         // let mockResponseToken = {tokens :{access:"123456" , refresh:"123456"} }
         // dispatch(setUserToken(mockResponseToken));
-        navigate(paths.DASHBOARD);
+        navigate(paths.PROPOSAL);
       }
     } catch (err) {
       console.log("err", err)

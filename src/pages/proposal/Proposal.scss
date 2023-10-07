@@ -1,12 +1,20 @@
 @import "../../containers/shared/variables.module.scss";
 
-.proposal-view {
-  width: 100% !important;
+.proposal-form{
+  width: 100%;
 }
 
 .form-section-gap .form-heading {
   font-size: $font-16;
   font-weight: 600;
+}
+
+.fields-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 1.5%;
+  gap: 1vw;
 }
 
 .form-section-gap {

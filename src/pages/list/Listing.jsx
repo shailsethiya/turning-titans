@@ -71,7 +71,7 @@ const Listing = ({ history }) => {
     };
 
     return (
-        <Box className="table-view">
+        <Box className="container-height table-view">
             <Card borderRadius="0" title="Listing"></Card>
             <Box>
                 <List className="list-header" aria-label="Model at risk">

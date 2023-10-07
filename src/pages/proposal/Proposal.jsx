@@ -10,10 +10,10 @@ import {
   filter_plugin_fields,
   get_button_style,
 } from "../../containers/utils/utils";
+import variables from "../../containers/shared/variables.module.scss";
 import StyledButton from "../../components/button";
 import { CREATE_PROPOSAL } from "../../containers/shared/constants";
 import Card from "../../components/card";
-import { ListingSkeleton } from "../../containers/shared/skeletons";
 import "./Proposal.scss";
 
 const Proposal = ({ history }) => {
@@ -33,14 +33,20 @@ const Proposal = ({ history }) => {
     );
   };
 
+  const createProposal = (form) => {
+    //Api call
+    console.log("form====", form);
+  };
+
   return (
-    <Box className="proposal-view">
+    <Box className="proposal-form">
       <Formik
         validationSchema={formValidationSchema}
         initialValues={formInitialValues}
-        enableReinitialize={false}
-        onSubmit={(form) => {
+        enableReinitialize={true}
+        onSubmit={async (form) => {
           setButtonState("loading");
+          createProposal(form);
         }}
       >
         {({
@@ -68,46 +74,72 @@ const Proposal = ({ history }) => {
           }, []);
 
           return (
-            <Form
-              className="dashboard-form"
-              autoComplete="off"
-              noValidate
-              onSubmit={handleSubmit}
-            >
-              {Object.entries({ ...CREATE_PROPOSAL }).map(([key, value]) => (
-                <Card title="Create proposal" className="form-section-gap">
-                  <Box className="fields-container">
-                    {value.map((field) =>
-                      filter_plugin_fields(
-                        field,
-                        Object.values({ ...CREATE_PROPOSAL }).flat(),
-                        errors,
-                        values,
-                        touched,
-                        setFieldValue,
-                        undefined,
-                        true
+            <>
+              <Card
+                title="Create proposal"
+                padding="1.111vw 1.111vw 0vw 1.111vw"
+                divider={true}
+              ></Card>
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  paddingTop: "2vw",
+                }}
+              >
+                <Form
+                  style={{ width: "60%" }}
+                  autoComplete="off"
+                  noValidate
+                  onSubmit={handleSubmit}
+                >
+                  <Card background={variables.white}>
+                    {Object.entries({ ...CREATE_PROPOSAL }).map(
+                      ([key, value]) => (
+                        <Box className="form-section-gap">
+                          <Typography className="form-heading">
+                            {section_name_formatter(key)}
+                          </Typography>
+                          <Box className="form-section-gap">
+                            {value.map((field) =>
+                              filter_plugin_fields(
+                                field,
+                                Object.values({ ...CREATE_PROPOSAL }).flat(),
+                                errors,
+                                values,
+                                touched,
+                                setFieldValue,
+                                undefined,
+                                true
+                              )
+                            )}
+
+                            <StyledButton
+                              variant="outlined"
+                              text={buttonStyle().text}
+                              width={"100%"}
+                              type="submit"
+                              startIcon={
+                                buttonStyle().icon && buttonStyle().icon
+                              }
+                              stroke={
+                                buttonStyle().iconStroke &&
+                                buttonStyle().iconStroke
+                              }
+                              iconWidth="1.2vw"
+                              iconHeight="1.2vw"
+                              background={buttonStyle().background}
+                              color={buttonStyle().color}
+                              buttonState={buttonState}
+                            />
+                          </Box>
+                        </Box>
                       )
                     )}
-                  </Box>
-                  <StyledButton
-                    variant="outlined"
-                    text={buttonStyle().text}
-                    width={"100%"}
-                    type="submit"
-                    startIcon={buttonStyle().icon && buttonStyle().icon}
-                    stroke={
-                      buttonStyle().iconStroke && buttonStyle().iconStroke
-                    }
-                    iconWidth="1.2vw"
-                    iconHeight="1.2vw"
-                    background={buttonStyle().background}
-                    color={buttonStyle().color}
-                    buttonState={buttonState}
-                  />
-                </Card>
-              ))}
-            </Form>
+                  </Card>
+                </Form>
+              </Box>
+            </>
           );
         }}
       </Formik>

@@ -22,6 +22,7 @@ import moment from 'moment';
 import { isArray } from 'lodash';
 import { ReactComponent as Spinner } from '../../assets/images/spinner.svg';
 import { ReactComponent as Success } from '../../assets/images/success.svg';
+import { ReactComponent as Arrow } from '../../assets/images/arrow.svg';
 import UploadFile from '../../components/upload-file';
 
 export const format_file_size = (bytes) => {
@@ -556,6 +557,7 @@ export const filter_plugin_fields = (
     field_preload,
     field_action,
     max_rows,
+    min_rows,
     max_characters,
     popper_component,
     file_type,
@@ -852,6 +854,7 @@ export const filter_plugin_fields = (
           label={field_mandatory === true ? field_label : `${field_label} (Optional)`}
           variant="outlined"
           multiline
+          minRows={min_rows}
           maxRows={max_rows}
           inputProps={{ maxLength: max_characters }}
           type={field_type}

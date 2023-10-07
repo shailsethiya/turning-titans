@@ -26,6 +26,10 @@
     }
   }
 
+  .lower-tabs {
+    gap: clamp(0.8vw, 1.2vw, 1.5vw);
+  }
+
   .tabs {
     display: flex;
     flex-direction: column;
@@ -52,15 +56,15 @@
       }
 
       p {
-        font-size: $font-14;
+        font-size: $font-16;
         color: $white;
-        font-weight: 500;
+        font-weight: 600;
       }
 
       .overflow {
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 10vw;
+        width: 5vw;
         white-space: nowrap;
       }
     }
