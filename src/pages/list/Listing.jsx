@@ -102,7 +102,15 @@ const Listing = ({ history }) => {
           />
           <ListItemText
             className="col-width"
-            primary={<label className="card-title table-header">Status</label>}
+            primary={
+              <label className="card-title table-header">Created By</label>
+            }
+          />
+          <ListItemText
+            className="col-width"
+            primary={
+              <label className="card-title table-header">Created on</label>
+            }
           />
           <ListItemText
             className="col-width"
@@ -114,15 +122,7 @@ const Listing = ({ history }) => {
           />
           <ListItemText
             className="col-width"
-            primary={
-              <label className="card-title table-header">Created By</label>
-            }
-          />
-          <ListItemText
-            className="col-width"
-            primary={
-              <label className="card-title table-header">Created on</label>
-            }
+            primary={<label className="card-title table-header">Status</label>}
           />
           <ListItemText
             className="col-width"
@@ -166,7 +166,17 @@ const Listing = ({ history }) => {
               />
               <ListItemText
                 className="col-width"
-                primary={<label className="list-col run">{item?.status}</label>}
+                primary={
+                  <label className="list-col run">{item?.created_by}</label>
+                }
+              />
+              <ListItemText
+                className="col-width"
+                primary={
+                  <label className="list-col run">
+                    {moment(item?.created_on).format("DD/MM/YYYY")}
+                  </label>
+                }
               />
               <ListItemText className="col-width">
                 {item?.genereted_proposal && (
@@ -187,17 +197,7 @@ const Listing = ({ history }) => {
               </ListItemText>
               <ListItemText
                 className="col-width"
-                primary={
-                  <label className="list-col run">{item?.created_by}</label>
-                }
-              />
-              <ListItemText
-                className="col-width"
-                primary={
-                  <label className="list-col run">
-                    {moment(item?.created_on).format("DD/MM/YYYY")}
-                  </label>
-                }
+                primary={<label className="list-col run">{item?.status}</label>}
               />
               <ListItemText className="col-width">
                 <LongMenu
