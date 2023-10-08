@@ -55,15 +55,13 @@ const Listing = () => {
   };
 
   const handleDeleteVersion = async () => {
-    console.log("deleteId", deleteId)
     if (deleteId) {
       const res = await dispatch(deleteProposals({ id: deleteId }))
       if (res.statusCode == 200) {
-        setOpenDialog(false)
-        fetchList()
+        setOpenDialog(false);
+        fetchList();
       }
     }
-
   };
 
   const handleCloseDialog = () => {
@@ -73,12 +71,12 @@ const Listing = () => {
   };
 
   const handlePreviewOpen = async (item) => {
-    const res = await dispatch(perviewProposal({ id: item?.id }))
-    console.log("preview Response", res)
+    const response = await dispatch(perviewProposal({ id: item?.id }))
+    console.log("preview Response", response)
     setSelectedAction({
       dialogTitle: ` ${item?.name} | Preview`,
       component: RfaPreview,
-      data: res
+      previewHtmlContent: response,
     });
   };
 
@@ -219,20 +217,21 @@ const Listing = () => {
                 <ListItemText
                   className="col-width"
                   primary={
-                  <Chip
-                    color="primary"
-                    size="small"
-                    label={item?.status}
-                    className="chip-style"
-                  >
-                  </Chip>
+                    <Chip
+                      color="primary"
+                      size="small"
+                      label={item?.status}
+                      className="chip-style"
+                    >
+                    </Chip>
                   }
                 />
                 <ListItemText className="col-width">
                   <LongMenu
                     longMenu={true}
                     className="long-menu"
-                    options={[{ label: "Delete", type: "alert" }]}
+                    options={[{ label: "Delete", type: "alert" },
+                    { label: "Share", type: "text" }]}
                     anchorEl={anchorEl}
                     handleClick={(e) => setAnchorEl(e.currentTarget)}
                     handleMenuClick={(e) => handleMenuClick(e, item)}
