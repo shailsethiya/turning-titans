@@ -1,5 +1,5 @@
 export const LOGIN = {
-  LOGIN_DETAILS: [
+  SIGN_IN: [
     {
       field_id: "username",
       field_label: "Username",

@@ -32,10 +32,10 @@ function Login() {
   const buttonStyle = () => {
     return get_button_style(
       buttonState,
-      'Login',
-      'Please wait while we submit your login',
-      'Login successfully',
-      'Login failed'
+      'Sign in',
+      'Please wait while we submit your Sign in request',
+      'Sign in successfully',
+      'Sign in  failed'
     );
   };
 
@@ -81,12 +81,12 @@ function Login() {
           return (
             <Box className="bg-img">
             <Form
-              style={{ width: "30%" }}
+              style={{ width: "25%" }}
               autoComplete="off"
               noValidate
               onSubmit={handleSubmit}
             >
-              <Card background={variables.white}>
+              <Card padding="2vw" borderRadius="2vw" background={variables.white}>
               {Object.entries({ ...LOGIN }).map(([key, value]) => (
                 <Box className="form-section-gap">
                   <Typography className="form-heading">{section_name_formatter(key)}</Typography>
