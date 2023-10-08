@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Formik } from 'formik';
-import { loginSchema } from "../../utils/index";
+// import { loginSchema } from "../../utils/index";
 import { Box, Typography } from '@material-ui/core';
 import { useDispatch } from "react-redux";
 import * as yup from 'yup';
@@ -14,13 +14,14 @@ import {
 import Card from "../../components/card";
 import StyledButton from '../../components/button';
 import { LOGIN } from '../../containers/shared/constants';
-import { login } from "../../utils/loginAPi";
+// import { login } from "../../utils/loginAPi";
 import variables from "../../containers/shared/variables.module.scss";
 import { paths } from "../../routes/Path";
 import { setUserToken } from "../../store/actions";
 import { useNavigate } from "react-router-dom";
 import './Login.scss'
-// import { login } from "../../store/actions/index";
+import { login } from "../../store/actions/index";
+import { alertDialogue } from "../../utils";
 
 function Login() {
   const [formValidationSchema, setFormValidationSchema] = useState(yup.object({}));
@@ -39,16 +40,13 @@ function Login() {
     );
   };
 
-  const handleFormSubmit = async (val) => {
-    try {
-      const res = await login(val?.username, val.password);
-      if (res.success) {
-        // let mockResponseToken = {tokens :{access:"123456" , refresh:"123456"} }
-        // dispatch(setUserToken(mockResponseToken));
-        navigate(paths.PROPOSAL);
-      }
-    } catch (err) {
-      console.log("err", err)
+  const handleFormSubmit = async  (val) => {
+    const body = {username : val?.username,
+    password  :  val.password}
+    const  res = await  dispatch(login(body));
+    if(res.statusCode == 200){
+      alertDialogue(res.message, "", "success");
+      navigate(paths.PROPOSAL);
     }
   }
 

@@ -4,7 +4,7 @@ import { API_URL } from "../config/index"; // project configuration file
 import store from "../store"; // Access redux store data
 import { toggleLoader } from "../store/actions";
 import { alertDialogue, getLocalStorage } from "../utils/index";
-
+import axios from "axios";
 const getToken = () => {
   return getLocalStorage("accessToken");
 };
@@ -33,7 +33,7 @@ const responseHandler = (loader) => (res) => {
       return response;
     })
     .catch(() => {
-      alertDialogue("Something Went Wrong ...");
+      // alertDialogue("Something Went Wrong ...");
     });
   return promise;
 };
@@ -44,7 +44,7 @@ const responseHandler = (loader) => (res) => {
  ******************/
 const getHeader = () => ({
   "Content-Type": "application/json",
-  "CarrierAuthorization" : "rpMZ7iyJmC",
+  "access-control-allow-origin": "*"
 
   // Authorization: "Bearer " + getToken(),
 });
@@ -60,6 +60,7 @@ export const get = (...data) => {
   return fetch(`${API_URL}/${url}`, {
     method: "get",
     headers: getHeader(),
+    credentials: 'include' 
   })
     .then(responseHandler(loader))
     .catch(responseHandler(loader));
@@ -73,7 +74,7 @@ export const post = (...data) => {
   const [url, body, loader = "page"] = data;
   loader && store.dispatch(toggleLoader(true, loader));
   return fetch(`${API_URL}/${url}`, {
-    method: "post",
+    method: "POST",
     headers: getHeader(),
     body: JSON.stringify(body),
   })
@@ -123,6 +124,23 @@ export const patch = (...data) => {
     method: "patch",
     headers: getHeader(),
     body: JSON.stringify(body),
+  })
+    .then(responseHandler(loader))
+    .catch(responseHandler(loader));
+};
+/** *****************
+ @purpose : Fetch Patch API
+ @Parameter : {data}
+ @Author : shailendra
+ ******************/
+export const image = (...data) => {
+  const [url, body, loader = "page"] = data;
+  loader && store.dispatch(toggleLoader(true, loader));
+
+  return axios.post(`${API_URL}/${url}`, body, {
+    // headers: getHeader(),
+    headers: {'Content-Type': 'multipart/form-data'}
+    // body: JSON.stringify(body),
   })
     .then(responseHandler(loader))
     .catch(responseHandler(loader));

@@ -16,3 +16,4 @@ export const LOGOUT_USER = "LOGOUT_USER";
 
 // User reducer types
 export const SET_USER_INFO = "SET_USER_INFO";
+export const SET_LISTING_PROPOSAL = "SET_LISTING_PROPOSAL";

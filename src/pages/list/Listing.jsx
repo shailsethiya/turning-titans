@@ -16,12 +16,17 @@ import moment from "moment";
 import RfaPreview from "./RfaPreview";
 import listingmock from "./listingmock.json";
 import "./List.scss";
+import { deleteProposals, downloadProposals, getListProposals, perviewProposal } from "../../store/actions";
+import { alertDialogue } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
 
-const Listing = ({ history }) => {
+const Listing = () => {
   const [openDialog, setOpenDialog] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
   const [listing, setListing] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedAction, setSelectedAction] = useState(false);
+  const dispatch = useDispatch();
 
   const deleteDialogContent = {
     title: "Delete",
@@ -32,53 +37,54 @@ const Listing = ({ history }) => {
     noBtnTxt: `No, keep it`,
   };
 
-  const fetchList = () => {
-    const { data } = listingmock;
-    setListing(data);
+  const fetchList = async () => {
+    const res = await dispatch(getListProposals());
+    setListing(res)
   };
 
   useEffect(() => {
     fetchList();
   }, []);
 
-  const handleMenuClick = (event) => {
-    event.currentTarget.textContent === "Delete" && setOpenDialog(true);
+  const handleMenuClick = (event, obj) => {
+    if (event.currentTarget.textContent === "Delete") {
+      setOpenDialog(true);
+      setDeleteId(obj?.id)
+    }
   };
 
-  const handleDeleteVersion = () => {
-    const option = {
-      method: "DELETE",
-      headers: { "X-Project-Id": usecaseId },
-    };
+  const handleDeleteVersion = async () => {
+    console.log("deleteId", deleteId)
+    if (deleteId) {
+      const res = await dispatch(deleteProposals({ id: deleteId }))
+      if (res.statusCode == 200) {
+        setOpenDialog(false)
+        fetchList()
+      }
+    }
 
-    // request(
-    //   endPoints.registry.fetchModel
-    //     .concat(modelId)
-    //     .concat('/version/')
-    //     .concat(selectedVersion.version_id),
-    //   option
-    // )
-    //   .then((response) => {
-    //     setTimeout(() => {
-    //       history.push({
-    //         pathname: DEPLOY_MODEL_ROUTE,
-    //       });
-    //     }, 2000);
-    //   })
-    //   .catch((error) => {});
   };
 
   const handleCloseDialog = () => {
     setAnchorEl(null);
     setOpenDialog(false);
+    setDeleteId("");
   };
 
-  const handlePreviewOpen = (item) => {
+  const handlePreviewOpen = async (item) => {
+    const res = await dispatch(perviewProposal({ id: item?.id }))
+    console.log("preview Response", res)
     setSelectedAction({
       dialogTitle: ` ${item?.name} | Preview`,
       component: RfaPreview,
+      data: res
     });
   };
+
+  const downloadFile = async (obj) => {
+    const res = await dispatch(downloadProposals({ id: obj?.id }))
+    window.url(`localhost:5000/api/download_proposal/${obj?.id}`);
+  }
 
   return (
     <Box className="container-height table-view">
@@ -131,87 +137,89 @@ const Listing = ({ history }) => {
         </List>
       </Box>
 
-      {listing?.length > 0 ? (
+      {listing?.data?.list?.length > 0 ? (
         <Box className="list-body">
-          {listing?.map((item, i) => (
-            <List
-              key={i}
-              className="list-item-risk"
-              aria-label="Model At Risk list"
-            >
-              <ListItemText
-                style={{ paddingLeft: "2vw" }}
-                className="col-width1"
-                primary={<label className="list-col run">{i + 1}</label>}
-              />
-              <ListItemText
-                className="col-width2"
-                primary={
-                  <label
-                    onClick={() => {
-                      handlePreviewOpen(item);
-                    }}
-                    style={{ color: variables.grape }}
-                    className="list-col run"
-                  >
-                    {item?.name}
-                  </label>
-                }
-              />
-              <ListItemText
-                className="col-width"
-                primary={
-                  <label className="list-col run">{item?.LITM_offering}</label>
-                }
-              />
-              <ListItemText
-                className="col-width"
-                primary={
-                  <label className="list-col run">{item?.created_by}</label>
-                }
-              />
-              <ListItemText
-                className="col-width"
-                primary={
-                  <label className="list-col run">
-                    {moment(item?.created_on).format("DD/MM/YYYY")}
-                  </label>
-                }
-              />
-              <ListItemText className="col-width">
-                {item?.genereted_proposal && (
-                  <Tooltip title="Download">
-                    <SvgIcon
-                      component={Download}
-                      style={{
-                        fill: "#fff",
-                        cursor: "pointer",
-                        padding: "0.417vw",
-                      }}
-                      viewBox="0 0 16 16"
-                      htmlColor="#424242"
-                      // onClick={downloadFile}
-                    />
-                  </Tooltip>
-                )}
-              </ListItemText>
-              <ListItemText
-                className="col-width"
-                primary={<label className="list-col run">{item?.status}</label>}
-              />
-              <ListItemText className="col-width">
-                <LongMenu
-                  longMenu={true}
-                  className="long-menu"
-                  options={[{ label: "Delete", type: "alert" }]}
-                  anchorEl={anchorEl}
-                  handleClick={(e) => setAnchorEl(e.currentTarget)}
-                  handleMenuClick={handleMenuClick}
-                  handleClose={() => setAnchorEl(null)}
+          {listing?.data?.list?.map((item, i) => {
+            return (
+              <List
+                key={i}
+                className="list-item-risk"
+                aria-label="Model At Risk list"
+              >
+                <ListItemText
+                  style={{ paddingLeft: "2vw" }}
+                  className="col-width1"
+                  primary={<label className="list-col run">{i + 1}</label>}
                 />
-              </ListItemText>
-            </List>
-          ))}
+                <ListItemText
+                  className="col-width2"
+                  primary={
+                    <label
+                      onClick={() => {
+                        handlePreviewOpen(item);
+                      }}
+                      style={{ color: variables.grape }}
+                      className="list-col run"
+                    >
+                      {item?.name}
+                    </label>
+                  }
+                />
+                <ListItemText
+                  className="col-width"
+                  primary={
+                    <label className="list-col run">{item?.LTIM_offering}</label>
+                  }
+                />
+                <ListItemText
+                  className="col-width"
+                  primary={
+                    <label className="list-col run">{item?.created_by}</label>
+                  }
+                />
+                <ListItemText
+                  className="col-width"
+                  primary={
+                    <label className="list-col run">
+                      {moment(item?.created_on).format("DD/MM/YYYY")}
+                    </label>
+                  }
+                />
+                <ListItemText className="col-width">
+                  {item?.generated_proposal && (
+                    <Tooltip title="Download">
+                      <SvgIcon
+                        component={Download}
+                        style={{
+                          fill: "#fff",
+                          cursor: "pointer",
+                          padding: "0.417vw",
+                        }}
+                        viewBox="0 0 16 16"
+                        htmlColor="#424242"
+                        onClick={() => { downloadFile(item) }}
+                      />
+                    </Tooltip>
+                  )}
+                </ListItemText>
+                <ListItemText
+                  className="col-width"
+                  primary={<label className="list-col run">{item?.status}</label>}
+                />
+                <ListItemText className="col-width">
+                  <LongMenu
+                    longMenu={true}
+                    className="long-menu"
+                    options={[{ label: "Delete", type: "alert" }]}
+                    anchorEl={anchorEl}
+                    handleClick={(e) => setAnchorEl(e.currentTarget)}
+                    handleMenuClick={(e) => handleMenuClick(e, item)}
+                    handleClose={() => setAnchorEl(null)}
+                  />
+                </ListItemText>
+              </List>
+            )
+          })}
         </Box>
       ) : (
         <Card>
@@ -227,7 +235,7 @@ const Listing = ({ history }) => {
         dialogSecContent={deleteDialogContent.secContent}
         noBtn={deleteDialogContent.noBtnTxt}
         yesBtn={deleteDialogContent.yesBtnTxt}
-        handleConfirm={handleDeleteVersion}
+        handleConfirm={() => handleDeleteVersion()}
         background={variables.palePink}
         btnbgColor={variables.bostonUniversityRed}
       />

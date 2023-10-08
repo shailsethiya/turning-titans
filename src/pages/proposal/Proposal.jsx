@@ -15,6 +15,8 @@ import StyledButton from "../../components/button";
 import { CREATE_PROPOSAL } from "../../containers/shared/constants";
 import Card from "../../components/card";
 import "./Proposal.scss";
+import { addProposals } from "../../store/actions";
+import { useDispatch } from "react-redux";
 
 const Proposal = ({ history }) => {
   const [formValidationSchema, setFormValidationSchema] = useState(
@@ -22,6 +24,7 @@ const Proposal = ({ history }) => {
   );
   const [formInitialValues, setFormInitialValues] = useState({});
   const [buttonState, setButtonState] = useState("submit");
+  const dispatch = useDispatch();
 
   const buttonStyle = () => {
     return get_button_style(
@@ -34,8 +37,14 @@ const Proposal = ({ history }) => {
   };
 
   const createProposal = (form) => {
-    //Api call
-    console.log("form====", form);
+    let formData = new FormData();
+
+    formData.append('name', form.proposal_name);
+    formData.append('upload_file', form?.file_upload?.file);
+    formData.append('LTIM_offering', form.ltim_offering);
+    formData.append('additional_info', form.additional_info);
+
+    const res = dispatch(addProposals(formData))
   };
 
   return (

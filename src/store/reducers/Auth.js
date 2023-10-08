@@ -7,6 +7,7 @@ import * as types from "../actions/Types";
 const initialState = {
   userToken: {},
   userInfo: {},
+  getPropsalList:{}
 };
 /** ***************** 
 @purpose : ui reducer
@@ -32,6 +33,14 @@ const user = (userInitData = initialState, action = {}) => {
       return Object.assign({}, userInitData, {
         userInfo: { ...userInitData.data, ...action.data },
       });
+      case types.SET_LISTING_PROPOSAL:
+        return Object.assign({}, userInitData, 
+          // {
+          console.log(action , "userInitData" , userInitData)
+          // getPropsalList: { ...userInitData.data, ...c.data },
+        // }
+        )
+        ;
     default:
       return userInitData;
   }

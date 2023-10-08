@@ -6,9 +6,9 @@ import GuestLayout from "../components/layout/GuestLayout";
 import Proposal from "../pages/proposal/Proposal";
 import Manage from "../pages/manage/Manage";
 import Listing from "../pages/list/Listing";
-import Sidebar from "../components/layout/sidebar/Sidebar";
+// import Sidebar from "../components/layout/sidebar/Sidebar";
 import Login from "../pages/login/Login";
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 
 const MainRoutes = {

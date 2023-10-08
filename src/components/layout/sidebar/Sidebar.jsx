@@ -12,13 +12,15 @@ import "./Sidebar.scss";
 import AlertDialog from "../../dialog";
 import variables from "../../../containers/shared/variables.module.scss";
 import { paths } from "../../../routes/Path";
+import { logout } from "../../../store/actions";
+import { useDispatch } from "react-redux";
 
 const Sidebar = ({ history }) => {
   const location = useLocation();
   const [selectedTab, setSelectedTab] = useState();
   const [openDialog, setOpenDialog] = React.useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const tabs = useMemo(
     () => [
       {
@@ -93,8 +95,9 @@ const Sidebar = ({ history }) => {
     setOpenDialog(false);
   };
 
-  const logoutUser = () => {
-   
+  const logoutUser = async () => {
+     const res = await dispatch(logout());
+     console.log("logout " ,res)
   };
 
   useEffect(() => {

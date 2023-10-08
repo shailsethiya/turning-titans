@@ -31,7 +31,7 @@ export const CREATE_PROPOSAL = {
     },
     {
       field_id: "ltim_offering",
-      field_label: "LITM Offering",
+      field_label: "LTIM Offering",
       field_type: "select",
       field_width: "100%",
       field_value: "",
