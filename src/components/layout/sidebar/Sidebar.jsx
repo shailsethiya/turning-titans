@@ -3,15 +3,13 @@ import { Box, Typography, Chip } from "@material-ui/core";
 import { useLocation, matchPath, useNavigate } from "react-router-dom";
 import withRouter from "../../../hooks/withRouter";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import { ReactComponent as Apps } from "../../../assets/images/sidebar/apps.svg";
-import { ReactComponent as Jobs } from "../../../assets/images/sidebar/jobs.svg";
 import { ReactComponent as Home } from "../../../assets/images/sidebar/smart-home.svg";
-import { ReactComponent as ModelStore } from "../../../assets/images/sidebar/atom.svg";
+import { ReactComponent as List } from "../../../assets/images/sidebar/list.svg";
 import { ReactComponent as FeatureStore } from "../../../assets/images/sidebar/feature-store.svg";
 import { ReactComponent as Logout } from "../../../assets/images/sidebar/logout.svg";
 import { extract_query_param } from "../../../containers/utils/utils";
 import "./Sidebar.scss";
-import AlertDialog from '../../dialog';
+import AlertDialog from "../../dialog";
 import variables from "../../../containers/shared/variables.module.scss";
 import { paths } from "../../../routes/Path";
 
@@ -31,7 +29,7 @@ const Sidebar = ({ history }) => {
       {
         label: "Listing",
         link: paths.LISTING,
-        iconName: "atom.svg",
+        iconName: "list.svg",
       },
       {
         label: "Manage",
@@ -54,17 +52,17 @@ const Sidebar = ({ history }) => {
 
   const images = {
     "smart-home.svg": { icon: Home, viewBox: "0 0 22 24" },
-    "atom.svg": { icon: ModelStore, viewBox: "0 0 24 24" },
+    "list.svg": { icon: List, viewBox: "0 0 20 15" },
     "feature-store.svg": { icon: FeatureStore, viewBox: "6 0 12 24" },
     "logout.svg": { icon: Logout, viewBox: "0 0 24 24" },
   };
 
   const logout_content = {
-    title: 'Logout',
+    title: "Logout",
     content: `Are you sure you want to sign out? Your current session will be ended, 
       and you'll need to sign in again next time. Please save any unsaved changes before signing out.`,
-    secondContent: 'Thank you!',
-    noBtnTxt: 'No, I will stay',
+    secondContent: "Thank you!",
+    noBtnTxt: "No, I will stay",
     yesBtnTxt: `Yes, logout`,
   };
 
@@ -96,7 +94,7 @@ const Sidebar = ({ history }) => {
   };
 
   const logoutUser = () => {
-  
+   
   };
 
   useEffect(() => {
@@ -148,7 +146,7 @@ const Sidebar = ({ history }) => {
           </Box>
         ))}
       </Box>
-      {/* <Box
+      <Box
         className="tabs lower-tabs"
         style={{ marginTop: "auto", paddingBottom: "4vw" }}
       >
@@ -182,21 +180,25 @@ const Sidebar = ({ history }) => {
                   }}
                 />
               </>
-              {<Typography className="overflow">{option.label}</Typography>}
+              {
+                <Typography onClick={handleLogout} className="overflow">
+                  {option.label}
+                </Typography>
+              }
             </Box>
           </Box>
         ))}
-      </Box> */}
+      </Box>
       <AlertDialog
-          open={openDialog}
-          handleClose={handleCloseDialog}
-          dialogTitle={logout_content.title}
-          dialogContent={logout_content.content}
-          secondContent={logout_content.secondContent}
-          noBtn={logout_content.noBtnTxt}
-          yesBtn={logout_content.yesBtnTxt}
-          handleConfirm={logoutUser}
-        />
+        open={openDialog}
+        handleClose={handleCloseDialog}
+        dialogTitle={logout_content.title}
+        dialogContent={logout_content.content}
+        secondContent={logout_content.secondContent}
+        noBtn={logout_content.noBtnTxt}
+        yesBtn={logout_content.yesBtnTxt}
+        handleConfirm={logoutUser}
+      />
     </Box>
   );
 };

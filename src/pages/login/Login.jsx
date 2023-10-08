@@ -11,9 +11,11 @@ import {
   filter_plugin_fields,
   get_button_style,
 } from '../../containers/utils/utils';
+import Card from "../../components/card";
 import StyledButton from '../../components/button';
 import { LOGIN } from '../../containers/shared/constants';
 import { login } from "../../utils/loginAPi";
+import variables from "../../containers/shared/variables.module.scss";
 import { paths } from "../../routes/Path";
 import { setUserToken } from "../../store/actions";
 import { useNavigate } from "react-router-dom";
@@ -51,11 +53,11 @@ function Login() {
   }
 
   return (
-    <Box className="bg-img">
+    <Box className="login-wrapper">
       <Formik
         validationSchema={formValidationSchema}
         initialValues={formInitialValues}
-        enableReinitialize={false}
+        enableReinitialize={true}
         onSubmit={(form) => {
           setButtonState('loading');
           handleFormSubmit(form)
@@ -79,14 +81,16 @@ function Login() {
           return (
             <Box className="bg-img">
             <Form
+              style={{ width: "30%" }}
               autoComplete="off"
               noValidate
               onSubmit={handleSubmit}
             >
+              <Card background={variables.white}>
               {Object.entries({ ...LOGIN }).map(([key, value]) => (
                 <Box className="form-section-gap">
                   <Typography className="form-heading">{section_name_formatter(key)}</Typography>
-                  <Box className="form-control use-case-form-control">
+                  <Box className="form-section-gap">
                     {value.map((field) =>
                       filter_plugin_fields(
                         field,
@@ -115,6 +119,7 @@ function Login() {
                   />
                 </Box>
               ))}
+              </Card>
             </Form>
             </Box>
           );

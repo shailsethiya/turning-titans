@@ -1,4 +1,8 @@
-@import '../../containers/shared/variables.module.scss';
+@import "../../containers/shared/variables.module.scss";
+
+.login-wrapper {
+  background: $antiFlashWhite;
+}
 
 .bg-img {
   position: absolute;
@@ -7,6 +11,7 @@
   top: 0;
   bottom: 0;
   display: flex;
+  background: $antiFlashWhite;
   align-items: center;
   justify-content: center;
 }
