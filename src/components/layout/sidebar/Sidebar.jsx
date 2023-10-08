@@ -21,21 +21,17 @@ const Sidebar = ({ history }) => {
   const [openDialog, setOpenDialog] = React.useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const tabs = useMemo(
     () => [
       {
         label: "Proposal",
         link: paths.PROPOSAL,
-        iconName: "smart-home.svg",
-      },
-      {
-        label: "Listing",
-        link: paths.LISTING,
         iconName: "list.svg",
       },
       {
-        label: "Manage",
-        link: paths.MANAGE,
+        label: "Offering",
+        link: paths.OFFERING,
         iconName: "feature-store.svg",
       },
     ],

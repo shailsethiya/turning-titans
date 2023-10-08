@@ -10,5 +10,5 @@ export const paths = {
   PAGE_NOT_FOUND: "/404",
   PROPOSAL: "/proposal",
   LISTING: "/listing",
-  MANAGE: "/manage",
+  OFFERING: "/offering",
 };

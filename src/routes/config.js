@@ -4,8 +4,7 @@ import GuestRoute from "./GuestRoutes";
 import PrivateRoute from "./PrivateRoutes";
 import GuestLayout from "../components/layout/GuestLayout";
 import Proposal from "../pages/proposal/Proposal";
-import Manage from "../pages/manage/Manage";
-import Listing from "../pages/list/Listing";
+import Offering from "../pages/offering/Offering";
 // import Sidebar from "../components/layout/sidebar/Sidebar";
 import Login from "../pages/login/Login";
 // import { Navigate } from "react-router-dom";
@@ -24,15 +23,10 @@ const MainRoutes = {
       path: paths.PROPOSAL,
       element: <Proposal />,
     },
-    // List
+    //Offering
     {
-      path: paths.LISTING,
-      element: <Listing />,
-    },
-    //Manage
-    {
-      path: paths.MANAGE,
-      element: <Manage />,
+      path: paths.OFFERING,
+      element: <Offering />,
     },
   ],
 };

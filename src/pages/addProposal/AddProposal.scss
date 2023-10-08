@@ -1,0 +1,25 @@
+@import "../../containers/shared/variables.module.scss";
+
+.proposal-form{
+  width: 80%;
+}
+
+.form-section-gap .form-heading {
+  font-size: $font-16;
+  font-weight: 600;
+}
+
+.fields-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 1.5%;
+  gap: 1vw;
+}
+
+.form-section-gap {
+  display: flex;
+  font-size: $font-14;
+  flex-direction: column;
+  gap: 1.8vw;
+}

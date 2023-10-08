@@ -64,3 +64,31 @@ export const CREATE_PROPOSAL = {
     },
   ],
 };
+
+export const MANAGE_OFFER = {
+  MANAGE_OFFERING: [
+    {
+      field_id: "offering_name",
+      field_label: "Name",
+      field_value: "",
+      field_type: "text",
+      field_width: "100%",
+      field_mandatory: true,
+    },
+    {
+      field_id: "zip",
+      field_label: "Upload file",
+      field_value: {
+        file: "",
+        fileName: "",
+        fileSize: "",
+      },
+      alternate_field_type: 'upload',
+      file_type: "zip",
+      field_type: "upload",
+      file_accept: '.zip',
+      field_width: "100%",
+      field_mandatory: true,
+    },
+  ],
+} 

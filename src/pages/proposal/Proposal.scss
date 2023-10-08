@@ -1,25 +1,79 @@
-@import "../../containers/shared/variables.module.scss";
+@import '../../containers/shared/variables.module.scss';
 
-.proposal-form{
-  width: 100%;
+.table-view {
+  width: 100% !important;
 }
 
-.form-section-gap .form-heading {
-  font-size: $font-16;
-  font-weight: 600;
-}
-
-.fields-container {
+.list-header {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-top: 1.5%;
-  gap: 1vw;
-}
-
-.form-section-gap {
-  display: flex;
+  gap: 5vw;
+  background: $brightGray;
   font-size: $font-14;
-  flex-direction: column;
-  gap: 1.8vw;
+  font-weight: $font-wgt-600;
+  padding: 1%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.col-width1 {
+  width: 1vw;
+}
+
+.col-width2 {
+  width: 6vw;
+}
+
+.col-width {
+  width: 4vw;
+}
+
+.list-col {
+  color: $blackRussian;
+  font-size: $font-16;
+  font-weight: $font-wgt-400;
+  text-transform: capitalize;
+}
+
+.run {
+  cursor: pointer;
+}
+
+.alignment {
+  display: flex;
+  align-items: center;
+}
+
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 10vw;
+}
+
+.chip-style{
+  font-size: $font-14;
+}
+
+.list-item-risk {
+  display: flex;
+  gap: 5vw;
+  padding: 0.6% 1%;
+  border-bottom: 1px solid $whiteSmoke;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $ghostWhite;
+    cursor: pointer;
+  }
+}
+
+.list-body {
+  background-color: $white;
+  overflow-y: scroll;
+}
+
+.makeStyles-root-32 {
+  height: 0px;
 }
