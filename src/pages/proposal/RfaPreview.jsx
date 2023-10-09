@@ -1,11 +1,15 @@
 import React from "react";
-import { Box, SvgIcon } from "@material-ui/core";
+import { Box, SvgIcon, Typography } from "@material-ui/core";
 
 const RfaPreview = ({ props, selectedAction }) => {
   const { previewHtmlContent } = selectedAction;
+  console.log("props===", previewHtmlContent)
 
   return (
-    <>
+    <Box>
+      <h1>{previewHtmlContent?.summary}</h1>
+    </Box>
+    /**<>
       {previewHtmlContent && (
         <Box
           style={{
@@ -27,7 +31,7 @@ const RfaPreview = ({ props, selectedAction }) => {
         </Box>
       )}
       {!previewHtmlContent && <ListingSkeleton />};
-    </>)
+    </>**/)
 };
 
 export default RfaPreview;

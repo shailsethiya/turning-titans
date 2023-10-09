@@ -15,7 +15,7 @@ import StyledButton from "../../components/button";
 import { CREATE_PROPOSAL } from "../../containers/shared/constants";
 import Card from "../../components/card";
 import "./AddProposal.scss";
-import { addProposals } from "../../store/actions";
+import { addProposals, getListProposals } from "../../store/actions";
 import { useDispatch } from "react-redux";
 
 const Proposal = ({ props }) => {
@@ -45,6 +45,9 @@ const Proposal = ({ props }) => {
         formData.append('additional_info', form.additional_info);
 
         const res = dispatch(addProposals(formData))
+        props?.fetchList();
+        props?.handleCloseDialog();
+        // dispatch(getListProposals());
     };
 
     return (

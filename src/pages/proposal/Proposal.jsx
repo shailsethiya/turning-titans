@@ -22,19 +22,6 @@ import { alertDialogue } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import "./Proposal.scss";
 
-const StyleChip = withStyles({
-  root: {
-    backgroundColor: 'green',
-    color: "#fff"
-  }
-})(Chip);
-
-const StyleChip1 = withStyles({
-  root: {
-    backgroundColor: 'yellow',
-    color: "#fff"
-  }
-})
 
 const Listing = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -43,6 +30,20 @@ const Listing = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedAction, setSelectedAction] = useState(false);
   const dispatch = useDispatch();
+
+  const StyleChip = withStyles({
+    root: {
+      backgroundColor: 'green',
+      color: '#fff'
+    }
+  })(Chip);
+
+  const StyleChip1 = withStyles({
+    root: {
+      backgroundColor: 'orange',
+      color: '#fff'
+    }
+  })(Chip);
 
   const deleteDialogContent = {
     title: "Delete",
@@ -55,12 +56,19 @@ const Listing = () => {
 
   const fetchList = async () => {
     const res = await dispatch(getListProposals());
-    setListing(res)
+    console.log("res-===", res)
+    if (res.statusCode === 200) {
+      setListing(res)
+    }
   };
 
   useEffect(() => {
     fetchList();
   }, []);
+
+  useEffect(() => {
+    setOpenDialog(openDialog);
+  }, [openDialog]);
 
   const handleMenuClick = (event, obj) => {
     if (event.currentTarget.textContent === "Delete") {
@@ -68,7 +76,7 @@ const Listing = () => {
       setDeleteId(obj?.id)
     }
     if (event.currentTarget.textContent === "Generate summary") {
-      handlePreviewOpen();
+      handlePreviewOpen(obj?.id);
     }
   };
 
@@ -92,7 +100,7 @@ const Listing = () => {
     const response = await dispatch(perviewProposal({ id: item?.id }))
     console.log("preview Response", response)
     setSelectedAction({
-      dialogTitle: ` ${item?.name} | Preview`,
+      dialogTitle: ` ${item?.name} | Summary`,
       component: RfaPreview,
       props: item,
       previewHtmlContent: response,
@@ -110,6 +118,8 @@ const Listing = () => {
     setSelectedAction({
       dialogTitle: `Create Proposal`,
       component: AddProposal,
+      fetchList: fetchList(),
+      handleCloseDialog: handleCloseDialog()
     });
   }
 
@@ -238,19 +248,23 @@ const Listing = () => {
                 <ListItemText
                   className="col-width"
                   primary={item?.status === "Proposal Generated" ?
-                    <StyleChip
-                      size="small"
-                      label={item?.status === "Proposal Generated" ? "Successful" : "In-Progress"}
-                      className="chip-style"
-                    >
-                    </StyleChip>
+                    <>
+                      <StyleChip
+                        size="small"
+                        label={item?.status === "Proposal Generated" ? "Successful" : "In-Progress"}
+                        className="chip-style"
+                      >
+                      </StyleChip>
+                    </>
                     :
-                    <StyleChip1
-                      size="small"
-                      label={item?.status === "Proposal Generated" ? "Successful" : "In-Progress"}
-                      className="chip-style"
-                    >
-                    </StyleChip1>
+                    <>
+                      <StyleChip1
+                        size="small"
+                        label={item?.status === "Proposal Generated" ? "Successful" : "In-Progress"}
+                        className="chip-style"
+                      >
+                      </StyleChip1>
+                    </>
                   }
 
                 />
@@ -296,6 +310,10 @@ const Listing = () => {
           top="0"
           left="0"
           right="0"
+          fetchList={fetchList}
+          openDialog={openDialog}
+          setOpenDialog={setOpenDialog}
+          handleCloseDialog= {handleCloseDialog}
           resetAction={() => {
             setSelectedAction({});
           }}

@@ -10,6 +10,6 @@ export const apiUrls = {
   ADD_PROPOSALS:  "api/add_proposal",
   DOWNLOAD_PROPOSAL: "api/download_proposal/",
   DELETE_PROPOSAL:"api/delete_proposal/",
-  PERVIEW_PROPOSAL: "api/preview_proposal/",
+  PERVIEW_PROPOSAL: "api/proposal_summary/",
   LOGOUT:"auth/logout"
 };
