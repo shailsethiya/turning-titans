@@ -47,7 +47,7 @@ const FullScreenDialog = ({
       <Box
         position="fixed"
         top="2%"
-        left="0"
+        left="auto"
         right="1%"
         borderRadius="0.3vw"
         padding="0.4% 0.6%"
