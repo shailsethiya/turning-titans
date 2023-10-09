@@ -27,7 +27,7 @@ const Sidebar = ({ history }) => {
       {
         label: "Proposal",
         link: paths.PROPOSAL,
-        iconName: "list.svg",
+        iconName: "smart-home.svg",
       },
       {
         label: "Offering",
@@ -50,7 +50,7 @@ const Sidebar = ({ history }) => {
 
   const images = {
     "smart-home.svg": { icon: Home, viewBox: "0 0 22 24" },
-    "list.svg": { icon: List, viewBox: "0 0 20 15" },
+    "proposal.svg": { icon: List, viewBox: "0 0 20 15" },
     "feature-store.svg": { icon: FeatureStore, viewBox: "6 0 12 24" },
     "logout.svg": { icon: Logout, viewBox: "0 0 24 24" },
   };

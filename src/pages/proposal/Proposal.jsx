@@ -14,12 +14,20 @@ import { Box, SvgIcon } from "@material-ui/core";
 import variables from "../../containers/shared/variables.module.scss";
 import FullScreenDialog from "../../components/full-screen-dialog";
 import moment from "moment";
+import { withStyles } from '@material-ui/core/styles';
 import RfaPreview from "../proposal/RfaPreview";
 import AddProposal from "../addProposal/AddProposal";
 import { deleteProposals, downloadProposals, getListProposals, perviewProposal } from "../../store/actions";
 import { alertDialogue } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import "./Proposal.scss";
+
+const StyleChip = withStyles({
+  root: {
+    backgroundColor: 'green',
+    color: "#fff"
+  }
+})(Chip);
 
 const Listing = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -76,13 +84,16 @@ const Listing = () => {
     setSelectedAction({
       dialogTitle: ` ${item?.name} | Preview`,
       component: RfaPreview,
+      props: item,
       previewHtmlContent: response,
     });
   };
 
   const downloadFile = async (obj) => {
     const res = await dispatch(downloadProposals({ id: obj?.id }))
-    window.url(`localhost:5000/api/download_proposal/${obj?.id}`);
+    // window.open("https://www.educative.io/", "_blank");
+    const url = `http://127.0.0.1:5000/api/download_proposal/${obj?.id}`;
+    window.open(url, '_blank');
   }
 
   const handleCreateProposal = () => {
@@ -198,7 +209,7 @@ const Listing = () => {
                   }
                 />
                 <ListItemText className="col-width">
-                  {item?.generated_proposal && (
+                  {item?.generated_proposal && item?.status === "Proposal Generated" && (
                     <Tooltip title="Download">
                       <SvgIcon
                         component={Download}
@@ -216,15 +227,23 @@ const Listing = () => {
                 </ListItemText>
                 <ListItemText
                   className="col-width"
-                  primary={
-                    <Chip
-                      color="primary"
+                  primary={item?.status === "Proposal Generated" ?
+                    <StyleChip
                       size="small"
-                      label={item?.status}
+                      label={item?.status === "Proposal Generated" ? "Successful" : "Pending"}
+                      className="chip-style"
+                    >
+                    </StyleChip>
+                    :
+                    <Chip
+                      color="secondary"
+                      size="small"
+                      label={item?.status === "Proposal Generated" ? "Successful" : "Pending"}
                       className="chip-style"
                     >
                     </Chip>
                   }
+
                 />
                 <ListItemText className="col-width">
                   <LongMenu
