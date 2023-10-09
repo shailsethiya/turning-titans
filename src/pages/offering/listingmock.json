@@ -1,13 +1,10 @@
 {
-    "data": [
-      {
-        "name": "SCB model monitoring RFP",
-        "LITM_offering": "Fosfor Refract",
-        "status": "Proposal Pending",
-        "genereted_proposal": true,
-        "created_by": "Shailendra",
-        "created_on": "10/10/2023"
-      }
-    ]
-  }
-  
+  "data": [
+    {
+      "name": "Refract by fosfor",
+      "proposal_count": "4",
+      "added_by": "Mahesh Gadepia",
+      "doc": "View 14 docs"
+    }
+  ]
+}

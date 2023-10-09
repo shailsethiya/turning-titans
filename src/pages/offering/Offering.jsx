@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import withRouter from "../../hooks/withRouter";
 import { Form, Formik } from "formik";
+import LongMenu from "../../components/long-menu";
 import Card from "../../components/card";
 import {
   set_formik_validation_schema,
@@ -27,6 +28,8 @@ const Offering = () => {
   const [listing, setListing] = useState([]);
   const [formInitialValues, setFormInitialValues] = useState({});
   const [buttonState, setButtonState] = useState("submit");
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [selectedAction, setSelectedAction] = useState(false);
 
   const buttonStyle = () => {
     return get_button_style(
@@ -54,7 +57,7 @@ const Offering = () => {
       <Card title="Offering" padding="1.111vw 1.111vw 0vw 1.111vw" divider={true}>
       </Card>
       <Box style={{ display: "flex" }}>
-        <Box style={{ width: '40%'}}>
+        <Box style={{ width: '40%' }}>
           <Formik
             validationSchema={formValidationSchema}
             initialValues={formInitialValues}
@@ -96,7 +99,7 @@ const Offering = () => {
                       paddingTop: "2vw",
                     }}
                   >
-                    <Card>
+                    <Card width="80%">
                       <Form
                         style={{ width: "100%" }}
                         autoComplete="off"
@@ -152,7 +155,7 @@ const Offering = () => {
             }}
           </Formik>
         </Box>
-        <Box style={{ width: '60%'}}>
+        <Box style={{ width: '56%', paddingTop: "2vw" }}>
           <Card
             borderRadius="0"
             title="Listing">
@@ -161,23 +164,29 @@ const Offering = () => {
             <List className="list-header" aria-label="Model at risk">
               <ListItemText
                 style={{ paddingLeft: "2vw" }}
-                className="col-width1"
-                primary={<label className="card-title table-header">No.</label>}
+                className="col-width2"
+                primary={<label className="card-title table-header">Name of offering</label>}
               />
               <ListItemText
-                className="col-width2"
-                primary={<label className="card-title table-header">Name</label>}
+                className="col-width"
+                primary={<label className="card-title table-header">Proposal count</label>}
               />
               <ListItemText
                 className="col-width"
                 primary={
-                  <label className="card-title table-header">LITM Offering</label>
+                  <label className="card-title table-header">Added by</label>
                 }
               />
               <ListItemText
                 className="col-width"
                 primary={
-                  <label className="card-title table-header">Created By</label>
+                  <label className="card-title table-header">Documents</label>
+                }
+              />
+              <ListItemText
+                className="col-width"
+                primary={
+                  <label className="card-title table-header">Actions</label>
                 }
               />
             </List>
@@ -192,12 +201,8 @@ const Offering = () => {
                   aria-label="Model At Risk list"
                 >
                   <ListItemText
-                    style={{ paddingLeft: "2vw" }}
-                    className="col-width1"
-                    primary={<label className="list-col run">{i + 1}</label>}
-                  />
-                  <ListItemText
                     className="col-width2"
+                    style={{ paddingLeft: "2vw" }}
                     primary={
                       <label
                         onClick={() => {
@@ -213,15 +218,33 @@ const Offering = () => {
                   <ListItemText
                     className="col-width"
                     primary={
-                      <label className="list-col run">{item?.LITM_offering}</label>
+                      <label className="list-col run">{item?.proposal_count}</label>
                     }
                   />
                   <ListItemText
                     className="col-width"
                     primary={
-                      <label className="list-col run">{item?.created_by}</label>
+                      <label className="list-col run">{item?.added_by}</label>
                     }
                   />
+                  <ListItemText
+                    className="col-width"
+                    primary={
+                      <label className="list-col run">{item?.doc}</label>
+                    }
+                  />
+                  <ListItemText className="col-width">
+                    <LongMenu
+                      longMenu={true}
+                      className="long-menu"
+                      options={[{ label: "Delete", type: "alert" },
+                      { label: "Add Documents", type: "text" }]}
+                      anchorEl={anchorEl}
+                      handleClick={(e) => setAnchorEl(e.currentTarget)}
+                      handleMenuClick={(e) => handleMenuClick(e, item)}
+                      handleClose={() => setAnchorEl(null)}
+                    />
+                  </ListItemText>
                 </List>
               ))}
             </Box>

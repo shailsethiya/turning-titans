@@ -29,6 +29,13 @@ const StyleChip = withStyles({
   }
 })(Chip);
 
+const StyleChip1 = withStyles({
+  root: {
+    backgroundColor: 'yellow',
+    color: "#fff"
+  }
+})
+
 const Listing = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [deleteId, setDeleteId] = useState("");
@@ -59,6 +66,9 @@ const Listing = () => {
     if (event.currentTarget.textContent === "Delete") {
       setOpenDialog(true);
       setDeleteId(obj?.id)
+    }
+    if (event.currentTarget.textContent === "Generate summary") {
+      handlePreviewOpen();
     }
   };
 
@@ -230,18 +240,17 @@ const Listing = () => {
                   primary={item?.status === "Proposal Generated" ?
                     <StyleChip
                       size="small"
-                      label={item?.status === "Proposal Generated" ? "Successful" : "Pending"}
+                      label={item?.status === "Proposal Generated" ? "Successful" : "In-Progress"}
                       className="chip-style"
                     >
                     </StyleChip>
                     :
-                    <Chip
-                      color="secondary"
+                    <StyleChip1
                       size="small"
-                      label={item?.status === "Proposal Generated" ? "Successful" : "Pending"}
+                      label={item?.status === "Proposal Generated" ? "Successful" : "In-Progress"}
                       className="chip-style"
                     >
-                    </Chip>
+                    </StyleChip1>
                   }
 
                 />
@@ -250,7 +259,8 @@ const Listing = () => {
                     longMenu={true}
                     className="long-menu"
                     options={[{ label: "Delete", type: "alert" },
-                    { label: "Share", type: "text" }]}
+                    { label: "Share", type: "text" },
+                    { label: "Generate summary", type: "text" }]}
                     anchorEl={anchorEl}
                     handleClick={(e) => setAnchorEl(e.currentTarget)}
                     handleMenuClick={(e) => handleMenuClick(e, item)}

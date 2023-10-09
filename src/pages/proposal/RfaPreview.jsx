@@ -3,11 +3,10 @@ import { Box, SvgIcon } from "@material-ui/core";
 
 const RfaPreview = ({ props, selectedAction }) => {
   const { previewHtmlContent } = selectedAction;
-  const url =  `http://127.0.0.1:5000/api/preview_proposal/${selectedAction?.props?.id}`
 
   return (
     <>
-      {url && (
+      {previewHtmlContent && (
         <Box
           style={{
             borderWidth: '0px',
@@ -18,7 +17,7 @@ const RfaPreview = ({ props, selectedAction }) => {
           <iframe
             id="plugin-iframe"
             title="File Preview"
-            srcDoc={url}
+            src={previewHtmlContent}
             style={{
               borderWidth: '0px',
               width: '100%',
@@ -27,7 +26,7 @@ const RfaPreview = ({ props, selectedAction }) => {
           />
         </Box>
       )}
-      {!url && <ListingSkeleton />};
+      {!previewHtmlContent && <ListingSkeleton />};
     </>)
 };
 

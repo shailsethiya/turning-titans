@@ -500,9 +500,8 @@
   }
 
   .component-container {
-    padding: 2vw 0;
     align-items: start;
-    height: 100%;
+    height: calc(100% - 5vw);
     overflow-y: scroll;
   }
 

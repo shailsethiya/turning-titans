@@ -18,7 +18,7 @@ import "./AddProposal.scss";
 import { addProposals } from "../../store/actions";
 import { useDispatch } from "react-redux";
 
-const Proposal = ({ history }) => {
+const Proposal = ({ props }) => {
     const [formValidationSchema, setFormValidationSchema] = useState(
         yup.object({})
     );
